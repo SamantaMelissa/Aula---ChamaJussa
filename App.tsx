@@ -1,20 +1,40 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { Login } from './src/pages/login/Login';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { Montserrat_400Regular, Montserrat_600SemiBold, Montserrat_700Bold, useFonts } from '@expo-google-fonts/montserrat';
 
 export default function App() {
+
+  const[loaded] = useFonts({
+    Montserrat_400Regular,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold
+  })
+
+  if(!loaded){
+    return (
+      <Text>🤪</Text>
+    )
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    // SafeAreaProvider -> calcular o tamanho das extremidades (topo e rodapé)
+    // SafeAreaView -> aplica o padrão de margem necessária para o tamanho do celular
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.safeareaview}>
+        <StatusBar style='dark'/>
+        {/* <StatusBar style='light'/> */}
+        {/* <StatusBar style='auto'/> */}
+        <Login/>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeareaview:{
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#F3F4F6"
+  }
 });
