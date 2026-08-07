@@ -1,10 +1,24 @@
-import { Image, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { Image, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from "react-native"
 import { Button, ButtonText, Colors, Title, TitleLabel } from "../../constants/theme"
-import { useState } from "react"
-export const Login = () => {
+import { useRouter } from "expo-router"
 
-  // const [text, onChangeText] = useState('Useless Text');
-  // const [number, onChangeNumber] = useState('');
+// export const Login = () => {
+export default function Login(){
+
+  const router = useRouter();
+
+  function acessar(){
+    // alert("teste")
+    //navigate e o push -> listagem de tela renderizadas
+    //ou Adiciona uma nova tela em cima da pilha.
+    // router.navigate("/listaOs")
+    router.push("/listaOs")
+    // login -> listaOs
+    //replace -> Substitui a tela atual.
+    // router.replace("/listaOs")
+    // listaOs
+  }
+
   return (
     <View style={estilos.container}>
       {/* <Image source={require('../../../assets/imgs/logo.svg')}
@@ -32,7 +46,7 @@ export const Login = () => {
             // value={number}
             ></TextInput>
         </View>
-        <TouchableOpacity style={estilos.btnLogin}>
+        <TouchableOpacity style={estilos.btnLogin} onPress={acessar}>
           <Text style={estilos.buttonText}>Acessar o sistema</Text>
         </TouchableOpacity>
       </View>

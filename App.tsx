@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { Login } from './src/pages/login/Login';
+import  Login from './src/app/login';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Montserrat_400Regular, Montserrat_600SemiBold, Montserrat_700Bold, useFonts } from '@expo-google-fonts/montserrat';
 
@@ -13,9 +13,7 @@ export default function App() {
   })
 
   if(!loaded){
-    return (
-      <Text>🤪</Text>
-    )
+    return null;
   }
 
   return (

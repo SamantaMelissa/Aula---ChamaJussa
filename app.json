@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "expo": {
+      "orientation": "DEFAULT"
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
