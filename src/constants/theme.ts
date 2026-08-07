@@ -1,7 +1,11 @@
 export const Colors = {
     corDeFundo: "#F3F4F6",
     corBtnVerde: "#10B981",
-    corTextoSecundario: "#7D7D7D"
+    corTextoSecundario: "#7D7D7D",
+    inputBorder: '#E5E5E7',
+    colorBtnBlue: '#006FFF',
+    btn_verde: '#10B981',    // Aquele verde chamativo do seu botão
+    inputBg: '#F2F2F4',    // O cinza claro de dentro dos inputs
 }
 
 export const Fonts = {
