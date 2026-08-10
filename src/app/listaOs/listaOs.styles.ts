@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     container: {
         // backgroundColor: "red",
         flex: 1,
-        padding: 30
+        paddingHorizontal: 30
 
 
     },
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     btn_nova_os: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 12,
+        paddingHorizontal: 20,
         paddingVertical: 8,
         borderRadius: 8,
         backgroundColor: Colors.colorBtnBlue,
@@ -70,15 +70,25 @@ export const styles = StyleSheet.create({
 
         marginBottom: 18,
 
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.16,
-        shadowRadius: 5,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 4,
+        // },
+        // shadowOpacity: 0.16,
+        // shadowRadius: 5,
 
-        elevation: 5,
+        // elevation: 5,
+                // --- LÓGICA DA SOMBRA ---
+
+        // 1. Para o Android (Usa um sistema baseado em níveis de elevação)
+        elevation: 4,
+
+        // 2. Para o iOS (Permite controle fino como no CSS web)
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 }, // Deslocamento da sombra
+        shadowOpacity: 0.1,                   // Opacidade/Intensidade
+        shadowRadius: 8,                      // Nível de desfoque (blur)
     },
 
     cardPressed: {
