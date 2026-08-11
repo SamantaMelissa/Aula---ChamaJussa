@@ -12,7 +12,7 @@ export default function Login() {
     //navigate e o push -> listagem de tela renderizadas
     //ou Adiciona uma nova tela em cima da pilha.
     // router.navigate("/listaOs")
-    router.push("/cadastroOs")
+    router.push("/listaOs")
     // login -> listaOs
     //replace -> Substitui a tela atual.
     // router.replace("/listaOs")

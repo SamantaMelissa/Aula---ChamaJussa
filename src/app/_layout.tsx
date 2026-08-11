@@ -61,13 +61,6 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
-          name="listaOs/index"
-          options={{
-            title: "Lista de OS",
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
           name="detalhesOs/index"
           options={{
             title: "Detalhes da OS",
@@ -75,26 +68,12 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
-          name="cadastroOs/index"
+          name="(tabs)"
           options={{
-            title: "Cadastro de OS",
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name="notificacoes/index"
-          options={{
-            title: "Notificações",
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="perfil/index"
-          options={{
-            title: "Perfill",
-            headerShown: false,
-          }}
-        />
+
       </Stack>
     </SafeAreaProvider>
   );

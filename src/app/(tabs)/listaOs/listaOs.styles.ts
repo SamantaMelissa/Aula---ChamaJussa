@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../../constants/theme";
+import { Colors } from "../../../constants/theme";
 
 export const styles = StyleSheet.create({
+    safearea: {
+        flex: 1,
+    },
     container: {
-        // backgroundColor: "red",
         flex: 1,
         paddingHorizontal: 30
-
-
     },
     superior: {
         flexDirection: 'row',
