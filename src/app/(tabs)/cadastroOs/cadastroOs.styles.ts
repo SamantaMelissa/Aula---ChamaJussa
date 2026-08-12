@@ -6,11 +6,6 @@ export const styles = StyleSheet.create({
     backgroundColor: '#F4F5F7',
     alignItems: 'center'
   },
-  container: {
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    paddingBottom: 20,
-  },
   headerTitle: {
     fontSize: 22,
     fontWeight: 'bold',
@@ -35,66 +30,66 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 4,
+
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#1A1A1A',
   },
-  date: {
-    fontSize: 13,
-    color: '#7C7C7C',
-    marginTop: 4,
-    marginBottom: 20,
-  },
-  infoRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  inputGroup: {
     marginBottom: 16,
   },
-  icon: {
-    marginRight: 12,
-    marginTop: 2,
+
+  input: {
+    backgroundColor: '#F4F5F7',
+    borderWidth: 1,
+    borderColor: '#E5E5EA',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: Platform.OS === 'ios' ? 12 : 8,
+    fontSize: 14,
+    color: '#333',
   },
-  label: {
-    fontSize: 12,
-    color: '#7C7C7C',
-    marginBottom: 2,
-  },
-  value: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#1A1A1A',
-    paddingRight: 20,
-  },
-  divider: {
-    height: 1,
-    backgroundColor: '#E5E5E5',
-    marginVertical: 16,
-  },
-  sectionTitle: {
-    fontSize: 16,
+
+  inputLabel: {
+    fontSize: 14,
     fontWeight: 'bold',
     color: '#1A1A1A',
     marginBottom: 8,
   },
-  descriptionText: {
-    fontSize: 14,
-    color: '#4A4A4A',
-    lineHeight: 20,
-    marginBottom: 20,
-  },
-  problemImage: {
-    width: '100%',
-    height: 160,
+  pickerContainer: {
+    backgroundColor: '#F4F5F7',
+    borderWidth: 1,
+    borderColor: '#E5E5EA',
     borderRadius: 8,
-    backgroundColor: '#E0E0E0',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  picker: {
+    height: 50,
+    width: '100%',
+  },
+  textArea: {
+    height: 100,
+    textAlignVertical: 'top',
+    paddingTop: 12,
+  },
+  imagePlaceholder: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  imagePlaceholderText: {
+    color: '#A0A0A0',
+    fontSize: 14,
+    marginLeft: 8,
   },
   button: {
-    width: '90%',
+    width: '100%',
     maxWidth: 450,
-
-
     borderWidth: 1.5,
     borderColor: '#0066FF',
     backgroundColor: '#EEF4FF',
@@ -102,6 +97,8 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     alignItems: 'center',
     marginBottom: 20,
+
+
   },
   buttonText: {
     color: '#0066FF',
