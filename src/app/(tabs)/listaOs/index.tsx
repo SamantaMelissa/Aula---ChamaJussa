@@ -2,6 +2,7 @@ import { FlatList, Pressable, Text, TouchableOpacity, View } from "react-native"
 import { styles } from "./listaOs.styles"
 import { SafeAreaView } from "react-native-safe-area-context";
 import Footer from "../../../components/footer/Footer";
+import CardOs from "../../../components/cardOs";
 
 const ordens = [
   {
@@ -73,63 +74,48 @@ const ordens = [
 // export const ListaOs = () => {
 export default function ListaOs() {
   return (
-      <SafeAreaView style={styles.safearea}>
-        <View style={styles.container}>
-          <View style={styles.superior}>
-            <View>
-              <Text style={styles.titulo}>Olá, Késsia</Text>
-              <Text style={styles.titulo_lista}>Minhas OSs</Text>
-            </View>
-            {/* Use o TouchableOpacity para protótipos rápidos e botões simples onde o efeito padrão de transparência já atende bem.
+    <SafeAreaView style={styles.safearea}>
+      <View style={styles.container}>
+        <View style={styles.superior}>
+          <View>
+            <Text style={styles.titulo}>Olá, Késsia</Text>
+            <Text style={styles.titulo_lista}>Minhas OSs</Text>
+          </View>
+          {/* Use o TouchableOpacity para protótipos rápidos e botões simples onde o efeito padrão de transparência já atende bem.
     Use o Pressable para criar sistemas de design robustos, botões com feedback de cor customizado e componentes que precisam de respostas ao toque mais complexas. */}
-            <TouchableOpacity style={styles.btn_nova_os}>
-              <Text style={styles.btn_text}>Nova OS</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.filtros}>
-            <Pressable style={styles.filterbtn}>
-              <Text style={styles.filterbtntxt}>Todos</Text>
-            </Pressable>
-            <Pressable style={styles.filterbtn}>
-              <Text style={styles.filterbtntxt}>Aberto</Text>
-            </Pressable>
-            <Pressable style={styles.filterbtn}>
-              <Text style={styles.filterbtntxt}>Em Andamento</Text>
-            </Pressable>
-            <Pressable style={styles.filterbtn}>
-              <Text style={styles.filterbtntxt}>Concluídas</Text>
-            </Pressable>
-          </View>
-          <FlatList
-            data={ordens}
-            keyExtractor={(item) => item.id}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => (
-              //card:
-              <Pressable
-                style={({ pressed }) => [
-                  styles.card,
-                  pressed && styles.cardPressed,
-                ]}
-              >
-                <View style={styles.cardTopo}>
-                  <Text style={styles.numero}>{item.numero}</Text>
-
-                  <View style={styles.statusContainer}>
-                    <Text style={styles.status}>{item.status}</Text>
-                  </View>
-                </View>
-
-                <Text style={styles.tituloCard}>{item.titulo}</Text>
-
-                <Text style={styles.descricao} numberOfLines={3}>
-                  {item.descricao}
-                </Text>
-              </Pressable>
-            )}
-          />
+          <TouchableOpacity style={styles.btn_nova_os}>
+            <Text style={styles.btn_text}>Nova OS</Text>
+          </TouchableOpacity>
         </View>
-        {/* <Footer /> */}
-      </SafeAreaView>
+        <View style={styles.filtros}>
+          <Pressable style={styles.filterbtn}>
+            <Text style={styles.filterbtntxt}>Todos</Text>
+          </Pressable>
+          <Pressable style={styles.filterbtn}>
+            <Text style={styles.filterbtntxt}>Aberto</Text>
+          </Pressable>
+          <Pressable style={styles.filterbtn}>
+            <Text style={styles.filterbtntxt}>Em Andamento</Text>
+          </Pressable>
+          <Pressable style={styles.filterbtn}>
+            <Text style={styles.filterbtntxt}>Concluídas</Text>
+          </Pressable>
+        </View>
+        <FlatList
+          data={ordens}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            //card:
+            <CardOs 
+            numOs={item.numero}
+            status={item.status}
+            titulo={item.titulo}
+            descricao={item.descricao}/>
+          )}
+        />
+      </View>
+      {/* <Footer /> */}
+    </SafeAreaView>
   )
 }
