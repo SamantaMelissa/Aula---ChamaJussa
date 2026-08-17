@@ -1,8 +1,10 @@
-import { FlatList, Pressable, Text, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, FlatList, Pressable, Text, TouchableOpacity, View } from "react-native"
 import { styles } from "./listaOs.styles"
 import { SafeAreaView } from "react-native-safe-area-context";
 import Footer from "../../../components/footer/Footer";
 import CardOs from "../../../components/cardOs";
+import useOrdemServico from "../../../hooks/useOrdemServico";
+import { OrdemServico } from "../../../@types";
 
 const ordens = [
   {
@@ -73,8 +75,12 @@ const ordens = [
 
 // export const ListaOs = () => {
 export default function ListaOs() {
+
+  // Hook que encapsula a chamada à API, loading e tratamento de erros
+  const { ordens, loading, error, recarregar } = useOrdemServico();
+
   return (
-    <SafeAreaView style={styles.safearea}>
+    <SafeAreaView style={styles.safearea} edges={['top', 'left', 'right']}>
       <View style={styles.container}>
         <View style={styles.superior}>
           <View>
@@ -101,19 +107,50 @@ export default function ListaOs() {
             <Text style={styles.filterbtntxt}>Concluídas</Text>
           </Pressable>
         </View>
-        <FlatList
-          data={ordens}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => (
-            //card:
-            <CardOs 
-            numOs={item.numero}
-            status={item.status}
-            titulo={item.titulo}
-            descricao={item.descricao}/>
-          )}
-        />
+        {/* Estado de Carregamento (Loading) */}
+        {loading && ordens.length === 0 ? (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator size="large" color="#0878F9" />
+            <Text style={{ marginTop: 12, color: '#6B7280' }}>Carregando ordens de serviço...</Text>
+          </View>
+        ) : error && ordens.length === 0 ? (
+          /* Estado de Erro */
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
+            <Text style={{ fontSize: 16, color: '#DC2626', textAlign: 'center', marginBottom: 16 }}>
+              {error}
+            </Text>
+            <TouchableOpacity
+              style={[styles.btn_nova_os, { backgroundColor: '#0878F9' }]}
+              onPress={() => recarregar()}
+            >
+              <Text style={styles.btn_text}>Tentar novamente</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          /* Exibição em FlatList com Pull-to-Refresh */
+          <FlatList
+            data={ordens}
+            keyExtractor={(item: OrdemServico) => String(item.osId || Math.random())}
+            showsVerticalScrollIndicator={false}
+            refreshing={loading}
+            onRefresh={() => recarregar()}
+            ListEmptyComponent={
+              <View style={{ alignItems: 'center', marginTop: 40 }}>
+                <Text style={{ color: '#9CA3AF', fontSize: 16 }}>
+                  Nenhuma ordem de serviço encontrada.
+                </Text>
+              </View>
+            }
+            renderItem={({ item }) => (
+              //card:
+              <CardOs
+                numOs={item.osId}
+                status={item.statusNome}
+                titulo={item.nomeItem}
+                descricao={item.descricao} />
+            )}
+          />
+        )}
       </View>
       {/* <Footer /> */}
     </SafeAreaView>

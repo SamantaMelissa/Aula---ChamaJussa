@@ -1,22 +1,53 @@
-import { Image, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from "react-native"
+import { ActivityIndicator, Alert, Image, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from "react-native"
 import { Button, ButtonText, Colors, Title, TitleLabel } from "../../constants/theme"
 import { useRouter } from "expo-router"
+import { useState } from "react";
+import { autenticacaoService } from "../../services/autenticacaoService";
 
 // export const Login = () => {
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
-  function acessar() {
+  async function acessar() {
     // alert("teste")
     //navigate e o push -> listagem de tela renderizadas
     //ou Adiciona uma nova tela em cima da pilha.
     // router.navigate("/listaOs")
-    router.push("/listaOs")
+    // router.push("/listaOs")
     // login -> listaOs
     //replace -> Substitui a tela atual.
     // router.replace("/listaOs")
     // listaOs
+
+    // O .trim() é um método de texto (string) que remove todos os espaços em branco do início e do final do que foi digitado.
+    const emailLimpo = email.trim();
+    const senhaLimpa = senha.trim();
+
+ 
+
+    if (!emailLimpo || !senhaLimpa) {
+      Alert.alert("Atenção", "Por favor, preencha o e-mail e a senha.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      await autenticacaoService.login({ email: emailLimpo, senha: senhaLimpa });
+      router.replace("/listaOs");
+    } catch (err: any) {
+      const mensagem =
+        err?.response?.data?.message ||
+        "E-mail ou senha inválidos. Tente novamente.";
+      // O Alert.alert do React Native exige que a mensagem seja uma string. Se o backend devolver um objeto complexo ou algo que não seja texto puro, o typeof mensagem === "string" impede o aplicativo de quebrar, exibindo "Erro inesperado.".
+      Alert.alert("Erro ao entrar", typeof mensagem === "string" ? mensagem : "Erro inesperado.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -34,20 +65,29 @@ export default function Login() {
         <View style={estilos.inputGroup}>
           <Text style={estilos.label}>E-mail</Text>
           <TextInput style={estilos.input}
-            placeholder="Digite seu e-mail"></TextInput>
+            placeholder="Digite seu e-mail"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"></TextInput>
         </View>
         <View style={estilos.inputGroup}>
           <Text style={estilos.label}>Senha</Text>
           <TextInput style={estilos.input}
             placeholder="Digite sua senha"
+            value={senha}
+            onChangeText={setSenha}
             secureTextEntry
           // keyboardType="numeric"
           // onChangeText={onChangeNumber}
           // value={number}
           ></TextInput>
         </View>
-        <TouchableOpacity style={estilos.btnLogin} onPress={acessar}>
-          <Text style={estilos.buttonText}>Acessar o sistema</Text>
+        <TouchableOpacity style={estilos.btnLogin} onPress={acessar} disabled={loading}>
+           {loading ? (
+              <ActivityIndicator color="#FFFFFF" />
+            ) : (
+              <Text style={estilos.buttonText}>Acessar o sistema</Text>
+            )}
         </TouchableOpacity>
       </View>
     </View>
