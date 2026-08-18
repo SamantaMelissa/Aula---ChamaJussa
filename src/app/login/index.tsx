@@ -1,22 +1,43 @@
-import { Image, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from "react-native"
+import { Alert, Image, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from "react-native"
 import { Button, ButtonText, Colors, Title, TitleLabel } from "../../constants/theme"
 import { useRouter } from "expo-router"
+import { useState } from "react";
+import { autenticacaoService } from "../../services/autenticacaoService";
 
 // export const Login = () => {
 export default function Login() {
 
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+
   const router = useRouter();
 
-  function acessar() {
+  async function acessar() {
     // alert("teste")
     //navigate e o push -> listagem de tela renderizadas
     //ou Adiciona uma nova tela em cima da pilha.
     // router.navigate("/listaOs")
-    router.push("/listaOs")
+    // router.push("/listaOs")
     // login -> listaOs
     //replace -> Substitui a tela atual.
     // router.replace("/listaOs")
     // listaOs
+    //trim -> remove os espaços do email
+    const emailDigitado = email.trim();
+    const senhaDigitado = senha.trim();
+
+    if(!emailDigitado || !senhaDigitado ){
+      Alert.alert("Atenção ⚠👀", "Por favor, preencha o e-mail e senha.");
+      return;
+    }
+
+    try {
+      await autenticacaoService.login({email: emailDigitado, senha: senhaDigitado})
+      router.replace("/listaOs")
+    } catch (error) {
+      Alert.alert("Erro!🚫❌", "E-mail ou senha inválidos");
+    }
+
   }
 
   return (
@@ -34,13 +55,18 @@ export default function Login() {
         <View style={estilos.inputGroup}>
           <Text style={estilos.label}>E-mail</Text>
           <TextInput style={estilos.input}
-            placeholder="Digite seu e-mail"></TextInput>
+            placeholder="Digite seu e-mail"
+            value={email}
+            onChangeText={setEmail}
+            ></TextInput>
         </View>
         <View style={estilos.inputGroup}>
           <Text style={estilos.label}>Senha</Text>
           <TextInput style={estilos.input}
             placeholder="Digite sua senha"
             secureTextEntry
+            value={senha}
+            onChangeText={setSenha}
           // keyboardType="numeric"
           // onChangeText={onChangeNumber}
           // value={number}
