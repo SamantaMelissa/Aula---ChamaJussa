@@ -4,17 +4,12 @@ import { styles } from "./cadastroOs.styles";
 import { Feather } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 import { useState } from "react";
-
-const LOCAIS_SETORES = [
-  { id: "1", nome: "Banheiro Masculino - Bloco B - 2º Andar" },
-  { id: "2", nome: "Banheiro Feminino - Bloco B - 2º Andar" },
-  { id: "3", nome: "Cozinha / Refeitório - Térreo" },
-  { id: "4", nome: "Almoxarifado Central" },
-  { id: "5", nome: "Laboratório de Informática - Bloco A" },
-];
+import useLocalizacao from "../../../hooks/useLocalizacao";
 
 export default function CadastroOs() {
-  const [localSelecionado, setLocalSelecionado] = useState<string>("");
+  const [localSelecionado, setLocalSelecionado] = useState<number | string>("");
+  const { locais, loading: loadingLocais } = useLocalizacao();
+
   return (
     <SafeAreaView style={styles.safeArea}>
       {/* Título Principal */}
@@ -53,20 +48,20 @@ export default function CadastroOs() {
                 style={styles.picker}
               >
                 <Picker.Item
-                  label="Selecione o local/setor..."
+                  label={loadingLocais ? "Carregando locais..." : "Selecione o local/setor..."}
                   value=""
                   color="#A0A0A0"
                 />
-                <Picker.Item
-                  label="Banheiro Masculino - Bloco B"
-                  value="banheiro_masc_b"
-                />
-                <Picker.Item
-                  label="Banheiro Feminino - Bloco B"
-                  value="banheiro_fem_b"
-                />
-                <Picker.Item label="Cozinha - Térreo" value="cozinha_terreo" />
-                <Picker.Item label="Almoxarifado" value="almoxarifado" />
+                {locais.map((local) => {
+                  const label = local.andar ? `${local.nome} - ${local.andar}` : local.nome;
+                  return (
+                    <Picker.Item
+                      key={String(local.localizacao_id)}
+                      label={label}
+                      value={local.localizacao_id}
+                    />
+                  );
+                })}
               </Picker>
             </View>
           </View>
