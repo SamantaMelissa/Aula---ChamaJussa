@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { Platform } from "react-native";
 
@@ -11,3 +12,16 @@ export const api = axios.create({
     baseURL: enderecoApi,
     timeout: 10000
 });
+
+//SOLICITACAO/REQUISICAO --OPPAAA PERA AI, QUERO TER/PEGAR O MEU TOKEN DO USUARIO--> ✅📑
+//interceptar/IMPEDIR O CURSO toda requisição feita pela API
+api.interceptors.request.use(async (config) =>{
+    const token = await AsyncStorage.getItem(process.env.EXPO_PUBLIC_TOKEN_KEY);
+
+    if(token){
+        //configurar o Bearer
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    
+    return config;
+})

@@ -2,7 +2,7 @@ import { Pressable, View, Text } from "react-native";
 import {styles} from "./CardOs.style"
 
 interface OrdemDeServico{
-    numOs: string,
+    numOs: number,
     status: string,
     titulo: string, 
     descricao: string

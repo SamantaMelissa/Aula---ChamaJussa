@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Login, LoginResponse } from "../@types/autenticacao";
+import { Login, LoginResponse } from "../@types";
 import { api } from "./api";
 
 export const autenticacaoService = {
