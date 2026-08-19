@@ -10,7 +10,7 @@ export const autenticacaoService = {
    * Envia as credenciais para a API e salva o token localmente em caso de sucesso.
    */
   async login(dados: LoginDTO): Promise<LoginResponseDTO> {
-    const { data } = await api.post<LoginResponseDTO>('/api/Autenticacao/login', dados);
+    const { data } = await api.post<LoginResponseDTO>('Autenticacao/login', dados);
 
     // Persiste o token de autenticação se ele existir na resposta
     if (data?.token) {

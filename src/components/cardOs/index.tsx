@@ -1,17 +1,30 @@
 import { Pressable, View, Text } from "react-native";
-import {styles} from "./CardOs.style"
+import { styles } from "./CardOs.style";
+import { useRouter } from "expo-router";
 
-interface OrdemDeServico{
-    numOs: number,
-    status: string,
-    titulo: string, 
-    descricao: string
+interface OrdemDeServico {
+    numOs: number;
+    status: string;
+    titulo: string;
+    descricao: string;
+    onPress?: () => void;
 }
 
-export default function CardOs({numOs, status, titulo, descricao} : OrdemDeServico) {
+export default function CardOs({ numOs, status, titulo, descricao, onPress }: OrdemDeServico) {
+    const router = useRouter();
     const identificador = `OS-${String(numOs).padStart(3, '0')}`;
+
+    const handlePress = () => {
+        if (onPress) {
+            onPress();
+        } else {
+            router.push(`/detalhesOs/${numOs}`);
+        }
+    };
+
     return (
         <Pressable
+            onPress={handlePress}
             style={({ pressed }) => [
                 styles.card,
                 pressed && styles.cardPressed,
@@ -31,5 +44,5 @@ export default function CardOs({numOs, status, titulo, descricao} : OrdemDeServi
                 {descricao}
             </Text>
         </Pressable>
-    )
-}
+    );
+}

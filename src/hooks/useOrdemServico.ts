@@ -1,6 +1,6 @@
 // src/hooks/useOrdensServico.ts
 import { useState, useEffect } from 'react';
-import { OrdemServico } from '../@types';
+import { CriarOrdemServicoDTO, OrdemServico } from '../@types';
 import { ordemServicoService } from '../services/ordemServicoService';
 
 export function useOrdemServico() {
@@ -24,18 +24,30 @@ export function useOrdemServico() {
     }
   }
 
-  // 3. useEffect executa a função ao carregar a tela pela primeira vez
+  // 3. Função para cadastrar uma nova ordem de serviço
+  async function criarOrdem(dados: CriarOrdemServicoDTO) {
+    try {
+      const novaOs = await ordemServicoService.criar(dados);
+      setOrdens((anteriores) => [novaOs, ...anteriores]);
+      return novaOs;
+    } catch (err: any) {
+      throw err;
+    }
+  }
+
+  // 4. useEffect executa a função ao carregar a tela pela primeira vez
   useEffect(() => {
     carregarOrdens();
   }, []);
 
-  // 4. Devolve tudo o que a tela precisa para exibir os dados
+  // 5. Devolve tudo o que a tela precisa para exibir os dados
   return {
     ordens,
     loading,
     error,
     recarregar: carregarOrdens,
+    criarOrdem,
   };
 }
 
-export default useOrdemServico;
+export default useOrdemServico;

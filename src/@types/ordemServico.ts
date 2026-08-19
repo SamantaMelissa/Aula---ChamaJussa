@@ -13,3 +13,17 @@ export interface OrdemServico {
   filaId: number;
   filaNome: string;
 }
+
+export interface ImagemUpload {
+  uri: string;
+  name?: string;
+  mimeType?: string;
+}
+
+export interface CriarOrdemServicoDTO {
+  nomeItem: string;
+  localizacaoId: number;
+  descricao: string;
+  imagem?: ImagemUpload | null;
+}
+
