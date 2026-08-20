@@ -24,7 +24,6 @@ export default function TabsLayout() {
           ),
         }}
       />
-
       <Tabs.Screen
         name="cadastroOs/index"
         options={{
@@ -39,7 +38,6 @@ export default function TabsLayout() {
           ),
         }}
       />
-
       <Tabs.Screen
         name="notificacoes/index"
         options={{

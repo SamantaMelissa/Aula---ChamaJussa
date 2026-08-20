@@ -3,8 +3,12 @@ import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { Entypo, Feather, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { styles } from './listaOs.styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDetalheOS } from '../../hooks/useDetalheOs';
+import { useLocalSearchParams } from 'expo-router';
 
 export default function DetalheOS() {
+    const {id} = useLocalSearchParams<{id: string}>();
+    const os = useDetalheOS(id);
     return (
         <SafeAreaView style={styles.safeArea}>
             {/* Título Principal */}
@@ -15,8 +19,8 @@ export default function DetalheOS() {
             <View style={styles.card}>
                 {/* Se você tentar aplicar um padding: 20 usando a propriedade style comum em um ScrollView, a barra de rolagem vai cortar visualmente ou o comportamento de scroll pode quebrar nas extremidades. */}
                 <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
-                    <Text style={styles.title}>Vazamento hidráulico</Text>
-                    <Text style={styles.date}>Criada em 17/06/2026, 11:29:58</Text>
+                    <Text style={styles.title}>{os?.nomeItem}</Text>
+                    <Text style={styles.date}>Criada em {os?.dtCriacao}</Text>
 
                     {/* Item: Máquina / Equipamento */}
                     <View style={styles.infoRow}>

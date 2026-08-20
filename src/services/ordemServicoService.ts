@@ -8,6 +8,12 @@ export const ordemServicoService = {
         const resposta = await api.get<OrdemServico[]>("OrdemServico");
 
         return resposta.data;
-    }
+    },
+    // | - Cria um Union type
+     // GET: Busca uma ordem de serviço por ID (/api/OrdemServico/{id})
+    async buscarPorId(id: number | string): Promise<OrdemServico> {
+        const resposta = await api.get<OrdemServico>(`OrdemServico/${id}`);
+        return resposta.data;
+    },
 
 }

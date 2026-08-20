@@ -1,5 +1,6 @@
 import { Pressable, View, Text } from "react-native";
 import {styles} from "./CardOs.style"
+import { useRouter } from "expo-router";
 
 interface OrdemDeServico{
     numOs: number,
@@ -9,8 +10,15 @@ interface OrdemDeServico{
 }
 
 export default function CardOs({numOs, status, titulo, descricao} : OrdemDeServico) {
+    const router = useRouter();
+
+    function direcionarDetalheOs(){
+        router.push("/detalhesOs/"+ numOs)
+    }
+
     return (
         <Pressable
+            onPress={direcionarDetalheOs}
             style={({ pressed }) => [
                 styles.card,
                 pressed && styles.cardPressed,
