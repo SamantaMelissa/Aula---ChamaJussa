@@ -16,7 +16,9 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#000',
-    marginBottom: 20,
+    flex: 1,
+    marginRight: 32
+    // marginBottom: 20,
   },
   card: {
     backgroundColor: '#FFF',
@@ -107,5 +109,14 @@ export const styles = StyleSheet.create({
     color: '#0066FF',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  headerRow: {
+    width: '90%',
+    maxWidth: 450,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 20,
+    marginVertical: 16
   }
 });

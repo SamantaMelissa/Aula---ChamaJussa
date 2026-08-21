@@ -16,6 +16,8 @@ export default function CardOs({numOs, status, titulo, descricao} : OrdemDeServi
         router.push("/detalhesOs/"+ numOs)
     }
 
+    const identificador = `OS-${String(numOs).padStart(3, '0')}`;
+
     return (
         <Pressable
             onPress={direcionarDetalheOs}
@@ -25,7 +27,7 @@ export default function CardOs({numOs, status, titulo, descricao} : OrdemDeServi
             ]}
         >
             <View style={styles.cardTopo}>
-                <Text style={styles.numero}>{numOs}</Text>
+                <Text style={styles.numero}>{identificador}</Text>
 
                 <View style={styles.statusContainer}>
                     <Text style={styles.status}>{status}</Text>

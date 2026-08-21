@@ -3,7 +3,7 @@ import { OrdemServico } from "../@types";
 import { ordemServicoService } from "../services/ordemServicoService";
 import { Alert } from "react-native";
 
-export function useOrdemServico(){
+export function useOrdemServico() {
     const [os, setOs] = useState<OrdemServico[]>([]);
 
     async function listarOs() {
@@ -15,9 +15,10 @@ export function useOrdemServico(){
         }
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         listarOs();
     }, [])
+
 
     return os;
 }

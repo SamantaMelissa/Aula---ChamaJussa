@@ -61,7 +61,7 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
-          name="detalhesOs/index"
+          name="detalhesOs/[id]"
           options={{
             title: "Detalhes da OS",
             headerShown: false,

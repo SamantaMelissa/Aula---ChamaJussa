@@ -4,6 +4,8 @@ import { View, Text, ScrollView, TextInput } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 export default function CardNotificacao() {
+
+  
   return (
     <View style={styles.card}>
       <FontAwesome5 name="bullhorn" size={26} color="#7FD3ED" style={styles.icon} />
